@@ -3,7 +3,7 @@ import java.util.Scanner;
 public class Guessno {
 
     public static void main(String[] args) {
-        try (Scanner sc = new Scanner(System.in)) {
+        Scanner sc = new Scanner(System.in) {
             int attempts = 1;
             int score = 0;
             int totalScore = 0;
