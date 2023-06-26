@@ -1,30 +1,52 @@
-import java.util.*;
+import java.util.Scanner;
+
 public class Guessno {
 
-    public static void main(String[] args)
-    {
+    public static void main(String[] args) {
         try (Scanner sc = new Scanner(System.in)) {
-            int guess,attempts=1, number;
-            // srand(time(0));
-            number = 1 + (int)(100 * Math.random());// Generate the random number between 100 to 1
-            // System.out.println("the number is "+number);
-            do{
-                System.out.println("Guess the number :");
-                guess= sc.nextInt();
+            int attempts = 1;
+            int score = 0;
+            int totalScore = 0;
+            int numberOfRounds = 3;
 
-                if(guess>number){
-                     System.out.println("Lower number please");
+            System.out.println("=== Guess the Number ===");
+
+            for (int round = 1; round <= numberOfRounds; round++) {
+                int number = 1 + (int) (100 * Math.random()); // Generate a random number between 1 and 100
+                System.out.println("\nRound " + round);
+                System.out.println("A random number between 1 and 100 has been generated. You have 10 attempts.");
+
+                while (attempts <= 10) {
+                    System.out.println("\nAttempt " + attempts);
+                    System.out.println("Guess the number: ");
+                    int guess = sc.nextInt();
+
+                    if (guess > number) {
+                        System.out.println("Lower number, please.");
+                    } else if (guess < number) {
+                        System.out.println("Higher number, please.");
+                    } else {
+                        System.out.println("Congratulations! You guessed it right!");
+                        score = 11 - attempts; // Calculate score based on the number of attempts
+                        totalScore += score;
+                        break;
+                    }
+
+                    attempts++;
                 }
-                else if(guess<number){
-                     System.out.println("Higher number please"); 
+
+                if (attempts > 10) {
+                    System.out.println("\nGame over! You reached the maximum number of attempts.");
+                    System.out.println("The correct number was: " + number);
                 }
-                else{
-                     System.out.println("You guessed it in"+attempts+"attempts" );
-                }
-                attempts++;
-      }
-     while(guess!=number);
+
+                attempts = 1; // Reset attempts for the next round
+            }
+
+            System.out.println("\n=== Game Over ===");
+            System.out.println("Total Score: " + totalScore);
         }
-         
-    }   
+    }
 }
+
+
